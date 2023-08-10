@@ -10,8 +10,8 @@ using UploadCsv.Data;
 namespace UploadCsv.Migrations
 {
     [DbContext(typeof(UploadContext))]
-    [Migration("20230810160458_add Points Table")]
-    partial class addPointsTable
+    [Migration("20230810191404_updateTables")]
+    partial class updateTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace UploadCsv.Migrations
 
             modelBuilder.Entity("UploadCsv.Models.Point", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CellId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -37,7 +37,7 @@ namespace UploadCsv.Migrations
                     b.Property<double>("Z")
                         .HasColumnType("REAL");
 
-                    b.HasKey("Id");
+                    b.HasKey("CellId");
 
                     b.ToTable("Points");
                 });

@@ -18,7 +18,7 @@ namespace UploadCsv.Migrations
 
             modelBuilder.Entity("UploadCsv.Models.Point", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CellId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -34,7 +34,7 @@ namespace UploadCsv.Migrations
                     b.Property<double>("Z")
                         .HasColumnType("REAL");
 
-                    b.HasKey("Id");
+                    b.HasKey("CellId");
 
                     b.ToTable("Points");
                 });
