@@ -21,34 +21,23 @@ public class FileController : ControllerBase
     }
 
     [HttpPost]
-    [Consumes( "text/csv" )]
     public async Task<IActionResult> UploadFIle(IFormFile file)
     {
+
+        List<Point> points = new List<Point>();
+
         string[] allowedExtensions = new string[] { ".csv" };
 
         string ext = System.IO.Path.GetExtension(file.FileName);
+        string filename = CreateTempfilePath();
 
         if (!allowedExtensions.Contains(ext)) return Unauthorized();
-
-        string filename = CreateTempfilePath();
         
         using (FileStream filestream = System.IO.File.Create(filename))
-        {
-            
+        {            
             file.CopyTo(filestream);
             filestream.Flush();
         }
-
-        var data = await GetData(filename);
-
-        System.IO.File.Delete(filename);
-
-        return Ok("OK!");
-    }
-
-    private async Task<List<Point>> GetData(string filename)
-    {
-        List<Point> points = new List<Point>();
 
         using (var reader = new StreamReader(filename))
         using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = ";", PrepareHeaderForMatch = (args) => args.Header.Trim() } ))
@@ -62,7 +51,9 @@ public class FileController : ControllerBase
             await transaction.CommitAsync();
         }
 
-        return points;
+        System.IO.File.Delete(filename);
+
+        return Ok("OK!");
     }
 
 

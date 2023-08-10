@@ -8,7 +8,7 @@ public class Point
     [Key]
     [Required(ErrorMessage = "Campo 'Id' Obrigatório")]
     [Name("CellId")]
-    public int Id { get; set; }
+    public int CellId { get; set; }
     
     [Required(ErrorMessage = "Campo 'X' Obrigatório")]
     [Name("X")]

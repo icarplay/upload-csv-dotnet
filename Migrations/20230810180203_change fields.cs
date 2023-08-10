@@ -5,7 +5,7 @@
 namespace UploadCsv.Migrations
 {
     /// <inheritdoc />
-    public partial class addPointsTable : Migration
+    public partial class changefields : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,7 +14,7 @@ namespace UploadCsv.Migrations
                 name: "Points",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    CellId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     X = table.Column<double>(type: "REAL", nullable: false),
                     Y = table.Column<double>(type: "REAL", nullable: false),
@@ -23,7 +23,7 @@ namespace UploadCsv.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Points", x => x.Id);
+                    table.PrimaryKey("PK_Points", x => x.CellId);
                 });
         }
 
