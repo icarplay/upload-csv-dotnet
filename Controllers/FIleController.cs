@@ -20,7 +20,7 @@ public class FileController : ControllerBase
     }
 
     
-    [HttpPost("/upload")]
+    [HttpPost("upload/")]
     public async Task<IActionResult> UploadFIle(IFormFile file)
     {
 
