@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projetos\\UploadCsv\\UploadCsv.csproj": {}
+    "C:\\Users\\Iam Caio\\source\\repos\\UploadCsv\\UploadCsv\\UploadCsv.csproj": {}
   },
   "projects": {
-    "D:\\Projetos\\UploadCsv\\UploadCsv.csproj": {
+    "C:\\Users\\Iam Caio\\source\\repos\\UploadCsv\\UploadCsv\\UploadCsv.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projetos\\UploadCsv\\UploadCsv.csproj",
+        "projectUniqueName": "C:\\Users\\Iam Caio\\source\\repos\\UploadCsv\\UploadCsv\\UploadCsv.csproj",
         "projectName": "UploadCsv",
-        "projectPath": "D:\\Projetos\\UploadCsv\\UploadCsv.csproj",
+        "projectPath": "C:\\Users\\Iam Caio\\source\\repos\\UploadCsv\\UploadCsv\\UploadCsv.csproj",
         "packagesPath": "C:\\Users\\Iam Caio\\.nuget\\packages\\",
-        "outputPath": "D:\\Projetos\\UploadCsv\\obj\\",
+        "outputPath": "C:\\Users\\Iam Caio\\source\\repos\\UploadCsv\\UploadCsv\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Iam Caio\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -26,8 +26,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -38,13 +38,9 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.AspNetCore.OpenApi": {
-              "target": "Package",
-              "version": "[7.0.9, )"
-            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
