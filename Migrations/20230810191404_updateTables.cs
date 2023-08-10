@@ -5,7 +5,7 @@
 namespace UploadCsv.Migrations
 {
     /// <inheritdoc />
-    public partial class changefields : Migration
+    public partial class updateTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

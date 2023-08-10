@@ -5,7 +5,6 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
 using EFCore.BulkExtensions;
-using System.Net.Mime;
 
 namespace UploadCsv.Controllers;
 

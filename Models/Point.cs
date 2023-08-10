@@ -6,7 +6,7 @@ namespace UploadCsv.Models;
 public class Point
 {
     [Key]
-    [Required(ErrorMessage = "Campo 'Id' Obrigatório")]
+    [Required]
     [Name("CellId")]
     public int CellId { get; set; }
     

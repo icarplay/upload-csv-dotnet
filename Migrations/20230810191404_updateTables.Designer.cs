@@ -10,8 +10,8 @@ using UploadCsv.Data;
 namespace UploadCsv.Migrations
 {
     [DbContext(typeof(UploadContext))]
-    [Migration("20230810180203_change fields")]
-    partial class changefields
+    [Migration("20230810191404_updateTables")]
+    partial class updateTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
