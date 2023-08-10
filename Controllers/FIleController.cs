@@ -1,0 +1,81 @@
+using Microsoft.AspNetCore.Mvc;
+using UploadCsv.Models;
+using UploadCsv.Data;
+using CsvHelper;
+using CsvHelper.Configuration;
+using System.Globalization;
+using EFCore.BulkExtensions;
+using System.Net.Mime;
+
+namespace UploadCsv.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class FileController : ControllerBase
+{
+
+    private UploadContext _context;
+    
+    public FileController(UploadContext context) {
+        _context = context;
+    }
+
+    [HttpPost]
+    [Consumes( "text/csv" )]
+    public async Task<IActionResult> UploadFIle(IFormFile file)
+    {
+        string[] allowedExtensions = new string[] { ".csv" };
+
+        string ext = System.IO.Path.GetExtension(file.FileName);
+
+        if (!allowedExtensions.Contains(ext)) return Unauthorized();
+
+        string filename = CreateTempfilePath();
+        
+        using (FileStream filestream = System.IO.File.Create(filename))
+        {
+            
+            file.CopyTo(filestream);
+            filestream.Flush();
+        }
+
+        var data = await GetData(filename);
+
+        System.IO.File.Delete(filename);
+
+        return Ok("OK!");
+    }
+
+    private async Task<List<Point>> GetData(string filename)
+    {
+        List<Point> points = new List<Point>();
+
+        using (var reader = new StreamReader(filename))
+        using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = ";", PrepareHeaderForMatch = (args) => args.Header.Trim() } ))
+        {
+            points = csv.GetRecords<Point>().ToList();
+        }
+
+        using (var transaction = _context.Database.BeginTransaction())
+        {
+            await _context.BulkInsertAsync(points);
+            await transaction.CommitAsync();
+        }
+
+        return points;
+    }
+
+
+    static string CreateTempfilePath()
+    {
+        var filename = $@"{DateTime.Now.Ticks}.csv";
+
+        var directoryPath = Path.Combine("temp", "uploads");
+
+        if (!Directory.Exists(directoryPath))
+            Directory.CreateDirectory(directoryPath);
+
+        return Path.Combine(directoryPath, filename);
+    }
+
+}
