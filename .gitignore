@@ -10,4 +10,19 @@ obj/
 /node_modules
 /wwwroot/node_modules
 
+
+# Sqlite
+
+*.db
+*.db-shm
+*.db-wal
+
+# vscode
+
+.vscode/
+
+# Temp
+
+temp/
+
 # End of https://www.toptal.com/developers/gitignore/api/dotnetcore
