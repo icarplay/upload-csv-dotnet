@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Iam Caio\\source\\repos\\UploadCsv\\UploadCsv\\UploadCsv.csproj": {}
+    "D:\\Projetos\\UploadCsv\\UploadCsv.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Iam Caio\\source\\repos\\UploadCsv\\UploadCsv\\UploadCsv.csproj": {
+    "D:\\Projetos\\UploadCsv\\UploadCsv.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Iam Caio\\source\\repos\\UploadCsv\\UploadCsv\\UploadCsv.csproj",
+        "projectUniqueName": "D:\\Projetos\\UploadCsv\\UploadCsv.csproj",
         "projectName": "UploadCsv",
-        "projectPath": "C:\\Users\\Iam Caio\\source\\repos\\UploadCsv\\UploadCsv\\UploadCsv.csproj",
+        "projectPath": "D:\\Projetos\\UploadCsv\\UploadCsv.csproj",
         "packagesPath": "C:\\Users\\Iam Caio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Iam Caio\\source\\repos\\UploadCsv\\UploadCsv\\obj\\",
+        "outputPath": "D:\\Projetos\\UploadCsv\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Iam Caio\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -41,6 +41,20 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
