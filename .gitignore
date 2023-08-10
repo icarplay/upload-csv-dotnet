@@ -24,5 +24,6 @@ obj/
 # Temp
 
 temp/
+.vs/
 
 # End of https://www.toptal.com/developers/gitignore/api/dotnetcore
