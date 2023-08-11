@@ -42,9 +42,9 @@ public class PointController : ControllerBase
     /// <returns> double com a média </returns>
     /// <response code="200"> Consulta realizada com sucesso. </response>
     [HttpGet("average/")]
-    public IActionResult GetAverage()
+    public async Task<IActionResult> GetAverage()
     {
-        var mean = _context.Points.DefaultIfEmpty().Average(c => (double?) c.Deslocamento) ?? 0;
+        var mean = await _context.Points.DefaultIfEmpty().AverageAsync(c => (double?) c.Deslocamento) ?? 0;
 
         return Ok(mean);
     }
@@ -53,7 +53,7 @@ public class PointController : ControllerBase
     /// <returns> lista de pontos </returns>
     /// <response code="200"> Consulta realizada com sucesso. </response>
     [HttpGet("max-min/")]
-    public List<ReadPointDto> GetMaxMinPoints()
+    public async Task<List<ReadPointDto>> GetMaxMinPoints()
     {
         var query = @"
             
@@ -68,7 +68,7 @@ public class PointController : ControllerBase
                                 );
         ";
 
-        var MaxAndMin = _mapper.Map<List<ReadPointDto>>(_context.Points.FromSqlRaw(query).ToList());
+        var MaxAndMin = _mapper.Map<List<ReadPointDto>>(await _context.Points.FromSqlRaw(query).ToListAsync());
 
         return MaxAndMin;
     }
@@ -76,9 +76,9 @@ public class PointController : ControllerBase
     /// <summary> Apaga todos os registros de pontos da base de dados. </summary>
     /// <response code="200"> Registros apagados com sucesso. </response>
     [HttpDelete]
-    public IActionResult DeleteAll()
+    public async Task<IActionResult> DeleteAll()
     {
-        _context.Points.ExecuteDelete();
+        await _context.Points.ExecuteDeleteAsync();
         
         return Ok();
     }
