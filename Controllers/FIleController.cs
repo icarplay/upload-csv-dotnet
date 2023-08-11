@@ -1,36 +1,34 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc;
+
+using CsvHelper.Configuration;
+using CsvHelper;
+
 using UploadCsv.Models;
 using UploadCsv.Data;
-using CsvHelper;
-using CsvHelper.Configuration;
-using System.Globalization;
+
 using EFCore.BulkExtensions;
 
+using System.Globalization;
+
+
 namespace UploadCsv.Controllers;
-
-
 
 [ApiController]
 [Route("[controller]")]
 public class FileController : ControllerBase
 {
+    private UploadContext _context;   
 
-    private UploadContext _context;
-    
-
-    public FileController(UploadContext context) {
+    public FileController(UploadContext context)
+    {
         _context = context;
     }
-
-
-
 
     /// <summary> Upload de CSV para inserção no SQLite </summary>
     /// <param name="file"> Arquivo CSV </param>
     /// <returns> IActionResult </returns>
     /// <response code="201"> Inserido com sucesso. </response>
-
     [HttpPost("upload/")]
     public IActionResult UploadFIle([BindRequired] IFormFile file)
     {
@@ -56,8 +54,6 @@ public class FileController : ControllerBase
         return Ok();
     }
 
-
-
     static void SaveFile(string filename, IFormFile file)
     {
         using (FileStream filestream = System.IO.File.Create(filename))
@@ -66,8 +62,6 @@ public class FileController : ControllerBase
             filestream.Flush();
         }
     }
-
-
 
     static List<Point>? ReadCsv(string filename)
     {
@@ -90,8 +84,6 @@ public class FileController : ControllerBase
         return points;
     }
 
-
-
     static async void BulkInsertCsv(List<Point> points, UploadContext _context)
     {
         using (var transaction = _context.Database.BeginTransaction())
@@ -100,8 +92,6 @@ public class FileController : ControllerBase
             await transaction.CommitAsync();
         }
     }
-
-
 
     static string CreateTempfilePath()
     {

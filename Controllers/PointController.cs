@@ -1,22 +1,21 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+
 using UploadCsv.Data.Dto;
 using UploadCsv.Models;
 using UploadCsv.Data;
+
 using AutoMapper;
 
+
 namespace UploadCsv.Controllers;
-
-
 
 [ApiController]
 [Route("[controller]")]
 public class PointController : ControllerBase
 {
-
     private UploadContext _context;
     private IMapper _mapper;
-
 
     public PointController(UploadContext context, IMapper mapper)
     {
@@ -24,15 +23,11 @@ public class PointController : ControllerBase
         _mapper = mapper;
     }
 
-
-
-
     /// <summary> Retorna pontos com paginação. </summary>
     /// <param name="skip"> Index inicial </param>
     /// <param name="take"> Index Final </param>
     /// <returns> Lista de pontos. </returns>
     /// <response code="200"> Consulta realizada com sucesso. </response>
-
     [HttpGet]
     public List<ReadPointDto> GetPoints(
         [FromQuery] int skip = 0,
@@ -43,13 +38,9 @@ public class PointController : ControllerBase
             _context.Points.Skip(skip).Take(take));
     }
 
-
-
-
     /// <summary> Retorna a média dos deslocamentos de todos os pontos. </summary>
     /// <returns> double com a média </returns>
     /// <response code="200"> Consulta realizada com sucesso. </response>
-
     [HttpGet("average/")]
     public IActionResult GetAverage()
     {
@@ -58,13 +49,9 @@ public class PointController : ControllerBase
         return Ok(mean);
     }
 
-
-
-
     /// <summary> Retorna os pontos com maior e menor deslocamento. </summary>
     /// <returns> lista de pontos </returns>
     /// <response code="200"> Consulta realizada com sucesso. </response>
-
     [HttpGet("max-min/")]
     public List<ReadPointDto> GetMaxMinPoints()
     {
@@ -86,11 +73,8 @@ public class PointController : ControllerBase
         return MaxAndMin;
     }
 
-
-
     /// <summary> Apaga todos os registros de pontos da base de dados. </summary>
     /// <response code="200"> Registros apagados com sucesso. </response>
-
     [HttpDelete]
     public IActionResult DeleteAll()
     {
