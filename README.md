@@ -4,7 +4,7 @@
 
 1. execute a migration: `dotnet ef database update`
 2. execute o projeto: `dotnet run watch`
-3. abra o endpoint do swagger: localhost:{port}/swagger/index.html
+3. abra o endpoint do swagger: `localhost:{port}/swagger/index.html`
 
 
 # Bibliotecas utilizadas:
