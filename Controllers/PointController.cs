@@ -7,6 +7,8 @@ using AutoMapper;
 
 namespace UploadCsv.Controllers;
 
+
+
 [ApiController]
 [Route("[controller]")]
 public class PointController : ControllerBase
@@ -15,11 +17,21 @@ public class PointController : ControllerBase
     private UploadContext _context;
     private IMapper _mapper;
 
+
     public PointController(UploadContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
+
+
+
+
+    /// <summary> Retorna pontos com paginação. </summary>
+    /// <param name="skip"> Index inicial </param>
+    /// <param name="take"> Index Final </param>
+    /// <returns> Lista de pontos. </returns>
+    /// <response code="200"> Consulta realizada com sucesso. </response>
 
     [HttpGet]
     public List<ReadPointDto> GetPoints(
@@ -31,6 +43,13 @@ public class PointController : ControllerBase
             _context.Points.Skip(skip).Take(take));
     }
 
+
+
+
+    /// <summary> Retorna a média dos deslocamentos de todos os pontos. </summary>
+    /// <returns> double com a média </returns>
+    /// <response code="200"> Consulta realizada com sucesso. </response>
+
     [HttpGet("average/")]
     public IActionResult GetAverage()
     {
@@ -39,8 +58,15 @@ public class PointController : ControllerBase
         return Ok(mean);
     }
 
-    [HttpGet("MaxMinRaw/")]
-    public List<ReadPointDto> GetMaxMinPointsRaw()
+
+
+
+    /// <summary> Retorna os pontos com maior e menor deslocamento. </summary>
+    /// <returns> lista de pontos </returns>
+    /// <response code="200"> Consulta realizada com sucesso. </response>
+
+    [HttpGet("max-min/")]
+    public List<ReadPointDto> GetMaxMinPoints()
     {
         var query = @"
             
@@ -48,7 +74,7 @@ public class PointController : ControllerBase
                             WHERE 
                                 CellId = (
                                     SELECT CellId FROM POINTS ORDER BY Deslocamento DESC Limit 1
-                                ) 
+                                )
                             OR 
                                 CellId = (
                                     SELECT CellId FROM POINTS ORDER BY Deslocamento ASC Limit 1
@@ -60,27 +86,16 @@ public class PointController : ControllerBase
         return MaxAndMin;
     }
 
-    [HttpGet("MaxMin/")]
-    public List<ReadPointDto>? GetMaxMinPoints()
-    {
-        var maxMin = new List<Point>();
-        
-        var max = _context.Points.OrderByDescending(p => p.Deslocamento).FirstOrDefault();
-        if (max != null) maxMin.Add(max);
 
-        var min = _context.Points.OrderBy(p => p.Deslocamento).FirstOrDefault();
-        if (min != null ) maxMin.Add(min);
 
-        return _mapper.Map<List<ReadPointDto>>(maxMin);
-    }
-
+    /// <summary> Apaga todos os registros de pontos da base de dados. </summary>
+    /// <response code="200"> Registros apagados com sucesso. </response>
 
     [HttpDelete]
     public IActionResult DeleteAll()
     {
         _context.Points.ExecuteDelete();
         
-        return NoContent();
+        return Ok();
     }
-
 }
